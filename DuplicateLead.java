@@ -1,0 +1,70 @@
+package data;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class DuplicateLead {
+
+	public static void main(String[] args) {
+		WebDriverManager.edgedriver().setup();
+		EdgeDriver driver= new EdgeDriver();
+		driver.get("http://leaftaps.com/opentaps");
+		driver.manage().window().maximize();
+		WebElement eluname= driver.findElement(By.id("username"));
+		eluname.sendKeys("Demosalesmanager");
+		WebElement elpswrd= driver.findElement(By.id("password"));
+		elpswrd.sendKeys("crmsfa");
+		WebElement login= driver.findElement(By.className("decorativeSubmit"));
+		login.click();
+		WebElement distext= driver.findElement(By.tagName("h2"));
+		String displayText= distext.getText();
+		System.out.println(displayText);
+		WebElement cmsa= driver.findElement(By.linkText("CRM/SFA"));
+		cmsa.click();
+		WebElement cleads= driver.findElement(By.linkText("Leads"));
+		cleads.click();
+		WebElement ccleads= driver.findElement(By.linkText("Create Lead"));
+		ccleads.click();
+		WebElement cname= driver.findElement(By.id("createLeadForm_companyName"));
+		cname.sendKeys("Testleaf");
+		WebElement fname= driver.findElement(By.id("createLeadForm_firstName"));
+		fname.sendKeys("Krishna");
+		WebElement lname= driver.findElement(By.id("createLeadForm_lastName"));
+		lname.sendKeys("Coumar");
+		WebElement flname= driver.findElement(By.id("createLeadForm_firstNameLocal"));
+		flname.sendKeys("Kishore");
+		WebElement emailid= driver.findElement(By.id("createLeadForm_primaryEmail"));
+		emailid.sendKeys("krish.coumar@gmail.com");
+		WebElement stateid= driver.findElement(By.id("createLeadForm_generalStateProvinceGeoId"));
+		Select sstateid = new Select(stateid);
+		sstateid.selectByVisibleText("New York");
+		WebElement createlogin= driver.findElement(By.className("smallSubmit"));
+		createlogin.click();
+		System.out.println("The title is "+ driver.getTitle());
+		WebElement dupleads= driver.findElement(By.linkText("Duplicate Lead"));
+		dupleads.click();
+		WebElement ccname= driver.findElement(By.id("createLeadForm_companyName"));
+		ccname.clear();
+		ccname.sendKeys("TestLeaf1");
+		WebElement fcname= driver.findElement(By.id("createLeadForm_firstName"));
+		fcname.clear();
+		fcname.sendKeys("KrishnaCoumar");
+		WebElement createduplogin= driver.findElement(By.className("smallSubmit"));
+		createduplogin.click();
+		System.out.println("The title is "+ driver.getTitle());
+		if (displayText.contains("Welcome"))
+		{
+			System.out.println("Login successful");
+		}
+		else
+		{ System.out.println("Login Failed"); }
+		}
+	  		//driver.close();
+		
+		
+		
+		
+	}
+
